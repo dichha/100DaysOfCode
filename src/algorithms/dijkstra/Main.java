@@ -19,7 +19,7 @@ public class Main {
             new Edge(5, 6, 4), new Edge(6, 7, 5)
             
         };
-        System.out.println(Integer.toString(edges.length));
+        
         Graph g = new Graph(edges);
         g.calculateShortestDistances(); 
         g.printResult();

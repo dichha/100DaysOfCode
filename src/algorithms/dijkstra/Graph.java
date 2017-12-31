@@ -107,7 +107,7 @@ public class Graph {
     
     // display result
     public void printResult(){
-        String output = "Number of nodes = " + this.noOfNodes;
+        String output = "\n Number of nodes = " + this.noOfNodes;
         output += "\n Number of edges = " + this.noOfEdges;
         
         for (int i = 0; i < this.nodes.length; i++){
