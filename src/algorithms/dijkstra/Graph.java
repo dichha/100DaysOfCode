@@ -36,8 +36,10 @@ public class Graph {
         // add all the edges to the nodes, each edge added to two
         // nodes (to and from)
         this.noOfEdges = edges.length;
-        for (int edgeToAdd = 0; edgeToAdd < this.noOfEdges; edgeToAdd++){
+        for (int edgeToAdd = 0; edgeToAdd < this.noOfNodes; edgeToAdd++){
+            System.out.println("node: " + Integer.toString(edgeToAdd));
             this.nodes[edges[edgeToAdd].getFromNodeIndex()].getEdges().add(edges[edgeToAdd]);
+            System.out.println((this.nodes[edges[edgeToAdd].getFromNodeIndex()].toString()));
             this.nodes[edges[edgeToAdd].getToNodeIndex()].getEdges().add(edges[edgeToAdd]);
         }
     } 
@@ -46,9 +48,9 @@ public class Graph {
     public int calculateNoOfNodes(Edge[] edges){
         int noOfNodes = 0;
         for (Edge e: edges){
-            if (e.getToNodeIndex() > noOfEdges)
+            if (e.getToNodeIndex() > noOfNodes)
                 noOfNodes = e.getToNodeIndex();
-            if (e.getFromNodeIndex() > noOfEdges)
+            if (e.getFromNodeIndex() > noOfNodes)
                 noOfNodes = e.getFromNodeIndex();
         }
         noOfNodes ++;
@@ -65,9 +67,10 @@ public class Graph {
         // visit every node
         for (int i=0; i< this.nodes.length; i++){
             // loop around the edges of current node
+            
             ArrayList<Edge> currentNodeEdges = this.nodes[nextNode].getEdges();
             
-            for (int joinedEdge = 0; joinedEdge < currentNodeEdges.size(); joinedEdge ++){
+            for (int joinedEdge = 0; joinedEdge < currentNodeEdges.size(); joinedEdge++){
                 int neighborIndex = currentNodeEdges.get(joinedEdge).getNeigboringIndex(nextNode);
                 
                 // only if not visited
@@ -75,6 +78,8 @@ public class Graph {
                     int tentative = this.nodes[nextNode].getDistanceFromSource()+currentNodeEdges.get(joinedEdge).getLength();
                     if (tentative < this.nodes[neighborIndex].getDistanceFromSource()){
                         this.nodes[neighborIndex].setDistanceFromSource(tentative);
+                        //System.out.println("node " + Integer.toString(i) + " distance: " + 
+                        //        Integer.toString(tentative));
                     }
                 }
             }
@@ -106,7 +111,7 @@ public class Graph {
         output += "\n Number of edges = " + this.noOfEdges;
         
         for (int i = 0; i < this.nodes.length; i++){
-            output += ("\n The shortest distance from node 0 to node " + i + "is"
+            output += ("\n The shortest distance from node 0 to node " + i + " is "
                     + nodes[i].getDistanceFromSource());
         }
         
