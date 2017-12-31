@@ -36,10 +36,10 @@ public class Graph {
         // add all the edges to the nodes, each edge added to two
         // nodes (to and from)
         this.noOfEdges = edges.length;
-        for (int edgeToAdd = 0; edgeToAdd < this.noOfNodes; edgeToAdd++){
-            System.out.println("node: " + Integer.toString(edgeToAdd));
+        for (int edgeToAdd = 0; edgeToAdd < this.noOfEdges; edgeToAdd++){
+            //System.out.println("node: " + Integer.toString(edgeToAdd));
             this.nodes[edges[edgeToAdd].getFromNodeIndex()].getEdges().add(edges[edgeToAdd]);
-            System.out.println((this.nodes[edges[edgeToAdd].getFromNodeIndex()].toString()));
+            //System.out.println((this.nodes[edges[edgeToAdd].getFromNodeIndex()].toString()));
             this.nodes[edges[edgeToAdd].getToNodeIndex()].getEdges().add(edges[edgeToAdd]);
         }
     } 
