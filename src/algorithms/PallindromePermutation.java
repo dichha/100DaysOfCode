@@ -60,14 +60,54 @@ public class PallindromePermutation {
             return val-A;
         return -1;
     }
+    // Solution #2
+    public static boolean isPermutationPallindrome2(String phrase){
+        int countOdd = 0; 
+        int[] table = new int[Character.getNumericValue('z') - 
+                        Character.getNumericValue('a')];
+        for (int i=0; i < phrase.length(); i++){
+            int num = getCharNumber(phrase.charAt(i));
+            if(num != -1){
+                table[num]++; 
+                if (table[num]%2 == 1)
+                    countOdd++; 
+                else
+                    countOdd--;
+            }
+        }
+        return countOdd <= 1; 
+        
+        
+    }
+    // Solution #3
+    public static boolean isPermutationPallindrome3(String phrase){
+        int bitvector = 0; 
+        for (char c: phrase.toCharArray()){
+            int num = getCharNumber(c); 
+            bitvector = toggle(bitvector, num);
+        }
+        return ((bitvector & (bitvector -1)) == 0);
+    }
+    
+    private static int toggle(int bitvector, int index){
+        if (index < 0) 
+            return bitvector;
+        int mask = 1 << index; 
+        if((mask & bitvector) == 0)
+            return bitvector  |= mask; 
+        else 
+            return bitvector &= ~mask; 
+    }
+    
+    
     public static void main(String[] args){
         String phrase = "taco belt a tleb ocat";
         System.out.println("\"" + phrase + "\"" + " is a permutation pallindrome? " + 
-                String.valueOf(isPermutationPallindrome(phrase)));
+                String.valueOf(isPermutationPallindrome3(phrase)));
     
         String phrase2 = "hello my olleh";
         System.out.println("\"" + phrase2 + "\"" + " is a permutation pallindrome? " + 
-                String.valueOf(isPermutationPallindrome(phrase2)));
+                String.valueOf(isPermutationPallindrome3(phrase2)));
     
     }
     
