@@ -5,6 +5,8 @@
  */
 package algorithms.LinkedList;
 
+import java.util.HashSet;
+
 /**
  *
  * @author dichha
@@ -47,15 +49,53 @@ public class Node {
         }
         System.out.println();
     }
+    // solution #1
+    static void removeNode(Node n){
+        HashSet<Integer> set = new HashSet<Integer>(); 
+         
+        Node prev = null; 
+        while(n != null){
+            if (set.contains(n.data)){
+                prev.next = n.next; 
+            }else{
+                set.add(n.data); 
+                prev = n; 
+            }
+            n = n.next; 
+        }
+    }
+    // solution #2
+    static void removeNode2(Node n){
+        Node current = n;  
+        while (current!= null){
+            Node runner = current;
+            while(runner.next!= null){
+                if(current.data == runner.next.data){
+                    runner.next = runner.next.next;
+                }else{
+                    runner= runner.next; 
+                }   
+            }
+            current = current.next;
+        }
+    }
     public static void main(String[] args){
         Node n = new Node(5); 
-        int[] list = {11, 22, 12, 82, 100, 0, -2, 32}; 
+        int[] list = {11, 22, 12, 82, 100,84,12,82,100,0, -2,22, 32}; 
         for(int num: list)
             appendToTail(n, num);
         
         System.out.println("Printing contents of Singly-linked LinkedList");
         displayContent(n);
-        
+        /*
+        System.out.println("linkedList after deleting duplicates");
+        removeNode(n); 
+        displayContent(n);
+        */
+        System.out.println("LinkedList after deleting duplicates: Solution #2");
+        removeNode2(n);
+        displayContent(n);
+            
         
     }
 }
