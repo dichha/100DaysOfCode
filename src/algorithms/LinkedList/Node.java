@@ -79,6 +79,28 @@ public class Node {
             current = current.next;
         }
     }
+    static Node nthToLast(Node head, int k){
+        Node p1 = head; 
+        Node p2 = head; 
+        // place p1 and p2 k noted apart in the linked list by 
+        // putting p2 at the beginning and p1 kn notes into the list. 
+        // When p1 will hit the end of the linked list after 
+        // LENGTH - k steps, at that point p2 will be LENGTH - K nodes into the list, 'or 
+        // k nodes from the end. 
+        
+        // move p2 k nodes into the list
+        for(int i=0; i<k; i++){
+            if (p1 == null) return null; 
+            p1 = p1.next;
+        }
+        // Move them at the same pace. When p1 hits the end, 
+        // p2 will be at the right element
+        while(p1 != null){
+            p1 = p1.next; 
+            p2 = p2.next; 
+        }
+        return p2; 
+    }
     public static void main(String[] args){
         Node n = new Node(5); 
         int[] list = {11, 22, 12, 82, 100,84,12,82,100,0, -2,22, 32}; 
@@ -91,10 +113,16 @@ public class Node {
         System.out.println("linkedList after deleting duplicates");
         removeNode(n); 
         displayContent(n);
-        */
+        
         System.out.println("LinkedList after deleting duplicates: Solution #2");
         removeNode2(n);
         displayContent(n);
+        */
+        System.out.println("LinkedList Kth to Last element ");
+        Node nthNode = nthToLast(n, 3);
+        
+        //displayContent(nthNode);
+        System.out.println("3rd to last element: " + nthNode.data);
             
         
     }
