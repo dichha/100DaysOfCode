@@ -1,0 +1,33 @@
+In a multithread world, there is a particular set of instructions called
+compare-and-swap(CAS). Those instructions compare their values to a given
+ones and, only if they are the same, set a new given values. This is done as a
+single atomic operations which is usually lock-free and highly efficient. 
+
+Java standard library has a large list of classes supporting atomic operations, 
+all of them located under java.util.concurrent.atomic package.
+
+CLASS                       DESCRIPTION
+AtomicBoolean               A boolean value that may be updated atomically
+AtomicInteger               An int value that may be updated atomically
+AtomicIntegerArray          A long value that may be updated atomically
+AtomicLongArray             A long array in which elements may be updated atomically.
+AtomicReference<V>          An object reference that may be updated atomically
+AtomicReferenceArray<E>     An array of object reference in which elements may be
+                            updated atomically. 
+
+
+The Java 8 release extends the java.util.concurrent.atomic with a new set of 
+atomic operation (accumulators and adders). 
+
+CLASS                       DESCRIPTION
+DoubleAccumulator           One or more variables that together maintain a 
+                            running double value updated using a supplied 
+                            function
+DoubleAdder                 One or more variables that together maintain an 
+                            initially zero double sum
+LongAccumulator             One or more variables that together maintain a 
+                            running long value updates using a supplied 
+                            function. 
+LongAdder                   One or more variables that together maintain
+                            an initially zero long sum. 
+

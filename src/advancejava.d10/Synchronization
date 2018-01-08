@@ -1,0 +1,30 @@
+Locking and synchronized keywords are powerful instruments which help a lot 
+to keep the data model and program state consistent in multithreaded applications. 
+However, using them unwisely causes threads contention and could dramatically
+decrease application performance. From the other side, not using the 
+synchronization primitives may (and will) lead to a weird program 
+state and corrupted data which eventually causes application to crash. 
+So the balance is important. 
+
+The advice is to try to use locks or/and synchronized where it is really 
+necessary. While doing so, make sure that locks are released as soon as possible, 
+amd the execution blocks which require locking or synchronizatoin are kept 
+minimal. Those techniques at least should help to reduce the contention but will 
+will not eliminate it. 
+
+In the recent year, a lot of so called lock-free algorithms and data structure 
+have emerged (i.e, atomic operations in Java from Atomic Operations section). 
+They provide much better performance comparing to the equivalent 
+implementations which are build using synchronization primitives. 
+
+It is good to know that JVM has a couple of runtime optimizations in order to 
+eliminate the locking when it may be not necessary.The most known is 
+biased locking: an optimization that improves uncontended synchronization 
+performance by eliminating operations associated with Java synchronization 
+primitives. 
+Nevertheless, JVM does its best, eliminating the unnecessary synchronization in 
+the application is much better option. Excessive use of synchronization has negative
+impact on application performance as threads will be wasting expensive CPU cycles
+competing for resources instead of doing the real work. 
+  
+ 

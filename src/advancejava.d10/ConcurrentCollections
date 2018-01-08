@@ -1,0 +1,55 @@
+Shared collections, accessible and modifiable by multiple threads, are 
+rather a rule than an exception. Java standard library provides a couple of
+helpful static methods in the class Collections which make any existing 
+collection thread-safe. For eg. 
+
+final Set<String> strings = 
+            Collections.synchronizedSet(new HashSet<String>()); 
+final Map<String, String> keys = 
+            Collections.synchronizedMap(new HashMap<String, String>()); 
+
+However, the returned general-purpose collection wrappers are thread-safe, 
+it is often no the best option as they provide quite mediocre performmance in 
+real-world applications. That is why Java standaed library includes a rich set 
+of collection classes tuned for concurrency. Below is just a list of most widely 
+used one, all hosted under java.util.concurrent pacakage. 
+
+
+CLASS                   DESCRIPTION
+CountDownLatch          A synchronization aid that allows one or more threads to 
+                        wait until a set of operation being performed in other
+                        threads completes. 
+CyclicBarrier           A synchronization aid that allows a set of threads to 
+                        all wait for each other to reach a common barrier point.
+Exchanger<V>            A synchronization point at which threads can pair and
+                        swap elements within paris. 
+Phaser                  A reusable synchronization barrier, similar in functionality
+                        to CyclicBarrier and CountDownLatch but supporting more
+                        flexible usage. 
+Semaphore               A counting semaphore
+ThreadLocalRandom       A random number generator isolated to the currentThread
+ReentrantReadWriteLock  An implementation of read/write lock
+
+Those classes are specifically designed to be used in the multithreaded applications. 
+They exploit a lot of techniques to make the concurrent access to the collection
+as efficient as possible and are the recommended replacement to synchronized
+collection wrappers. 
+
+EXPLORE JAVA STANDARD LIBRARY 
+The java.util.concurrent and java.util.concurrent.locks packages are 
+real gems for the Java developers who are writing concurrent applications. 
+As there are a lot of the classes there, in this section we going to cover 
+most useful of them. 
+CountDownLatch
+CyclicBarrier
+Exchange<V>
+Phaser
+Semaphore
+ThreadLocalRandom
+ReentrantReadWriteLock
+
+Unfortunately, the Java implementation of ReentrantReadWriteLock was not 
+so great and as of Java 8, there is new kind of lock: 
+StampedLock: A capability-based lock with three modes for controlling read/write
+access. 
+  
