@@ -101,6 +101,17 @@ public class Node {
         }
         return p2; 
     }
+    // Delete a node in the middle of a singly linked list given 
+    // access to only that link
+    
+    static boolean deleteMiddleNode(Node n){
+        if (n == null || n.next == null)
+            return false; 
+        Node next = n.next; 
+        n.data = next.data; 
+        n.next = next.next; 
+        return true;
+    }
     public static void main(String[] args){
         Node n = new Node(5); 
         int[] list = {11, 22, 12, 82, 100,84,12,82,100,0, -2,22, 32}; 
@@ -124,6 +135,12 @@ public class Node {
         //displayContent(nthNode);
         System.out.println("3rd to last element: " + nthNode.data);
             
+        System.out.println("deleting middle of a given linked list");
+        System.out.println("Node is: "+ n.next.next.next.next.data + " element");
+        boolean isDeleted = deleteMiddleNode(n.next.next.next.next);
+        System.out.println("Was able to delete? " + String.valueOf(isDeleted));
         
+        displayContent(n);
+                
     }
 }
