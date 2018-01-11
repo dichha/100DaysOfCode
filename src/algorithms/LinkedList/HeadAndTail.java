@@ -51,3 +51,34 @@ boolean isEqual(LinkedListNode one, LinkedListNode two){
     return head1 == null && head2 == null; 
     
 }
+// Solution 2: Iterative
+boolean isPallindrome(LinkedListNode head){
+    LinkedListNode fast = head; 
+    LinkedListNode slow = head; 
+    
+    /*
+    Push elements from first half of linked list onto stack. When fast runner
+    (which is moving in 2X speed) reaches the end of the linked list, 
+    then we know we're at the middle.
+    */
+    Stack<Integer> stack = new Stack<Integer>(); 
+    while(fast != null && fast.next != null){
+        stack.push(slow.data);
+        slow = slow.next; 
+        fast = fast.next.next; 
+    }
+    // Has odd number of elements, so skip the middle element
+    if (fast != null)
+        slow = slow.next; 
+
+    while(slow != null){
+        int top = stack.pop().intValue();
+        // If values are different, then it's not a pallindrome
+        if (top != slow.data)
+            return false; 
+        slow = slow.next; 
+    }
+    return true; 
+    
+    }
+}
