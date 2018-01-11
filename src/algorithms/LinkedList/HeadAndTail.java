@@ -82,3 +82,43 @@ boolean isPallindrome(LinkedListNode head){
     
     }
 }
+// Solution 3: Recustion
+
+class Result{
+        public LinkedListNode node; 
+        public boolean result; 
+}
+
+boolean isPallindrome(LinkedListNode head){
+    int length = lengthOfList(head)
+    Result p = isPallindromeRecurse(head, length);
+    return p.result; 
+}
+
+Result isPallindromeRecurse(head.next, length-2){
+    if (head == nul || length <= 0){ // even number of nodes
+        return new Result(head, true); 
+    }else if (length == 1){ // odd number of nodes
+        return new Result(head.next, true);
+    }
+    // Recurse on sublist
+    Result res = isPallindromeRecurse(head.next, length-2);
+    // If child calls are not a Pallindrome, pass back up a failure
+    if (!res.result || res.node == null)
+        return res; 
+    res.result = (head.data == res.node.data);
+
+    // Return the corresponding node
+    res.node = res.node.next; 
+    return res; 
+}
+
+
+int lengthOfList(LinkedListNode n){
+    int size = 0; 
+    while (n != null){
+        size ++; 
+        n = n.next; 
+    }
+    return size; 
+}
