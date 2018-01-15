@@ -48,5 +48,17 @@ public class MyQueueII<T> {
        return stackOldest.pop(); 
        
    }
+   //Sort Stack using 1 more stack
+   public Stack<T> sort(Stack<T> s){
+       Stack<T> r = new Stack<T>(); 
+       while(!s.isEmpty()){
+           T temp = s.pop(); 
+           while(!r.isEmpty() && r.peek() > temp){
+               s.push(r.pop());
+           }
+           r.push(temp);
+       }
+       return r; 
+   }
     
 }
