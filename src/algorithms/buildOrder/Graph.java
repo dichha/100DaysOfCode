@@ -17,11 +17,11 @@ public class Graph {
     private ArrayList<Project> nodes = new ArrayList<Project>(); 
     private HashMap<String, Project> map = new HashMap<String, Project>(); 
     
-    public Pject getOrCreateNode(String name){
+    public Project getOrCreateNode(String name){
         if (!map.containsKey(name)){
             Project node = new Project(name); 
             nodes.add(node); 
-            map.putAll(name, node);
+            map.put(name, node);
         }
         return map.get(name); 
     }
