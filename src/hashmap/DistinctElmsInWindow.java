@@ -7,6 +7,7 @@ package hashmap;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ import java.util.List;
  * @author dichha
  */
 public class DistinctElmsInWindow {
-    
+    /*
     static void countDistinctElms(int[] arr, int k){
         for(int i=0; i < arr.length; i++){
             if((i+k) <= arr.length){
@@ -31,6 +32,7 @@ public class DistinctElmsInWindow {
         }
         System.out.println();
     }
+    */
 
     /*
     static int countWindowDistinct(int[] arr, int k){
@@ -81,9 +83,53 @@ public class DistinctElmsInWindow {
                               (Arrays.copyOfRange(arr, i, arr.length), k));
     }
     */
+    static void countDistinctElms(int[] arr, int k){
+        HashMap<Integer, Integer> hm = new HashMap<Integer, Integer>(); 
+        int dist_count = 0; 
+        
+        // Traverse the first window and store count 
+        // of every element in hash map
+        
+        for(int i=0; i<k; i++){
+            if(hm.get(arr[i]) == null){
+                hm.put(arr[i], 1);
+                dist_count++;
+            }else{
+                hm.put(arr[i], hm.get(arr[i])+1);
+            }
+        }
+        System.out.print(dist_count);
+        
+        // Traverse through the remaining array
+        for(int i=k; i<arr.length; i++){
+            // Remove first element of previous window
+            // If there was only one occurence, then reduce distinct count
+            if(hm.get(arr[i-k]) == 1){
+                hm.remove(arr[i-k]);
+                dist_count--;
+            }else{
+                hm.put(arr[i-k], hm.get(arr[i-k])-1);
+            }
+            
+            // Add new element of current window
+            // If this element appears first time
+            // increament distnct element count 
+            
+            if(hm.get(arr[i]) == null){
+                hm.put(arr[i], 1);
+                dist_count++;
+            }else{
+                hm.put(arr[i], hm.get(arr[i])+1);
+            }
+            System.out.print(dist_count);
+        }
+    }
+    /*
     public static void main(String[] args){
         int[] arr = {1, 2, 1, 3, 4, 2, 3};
         int k = 4; 
         countDistinctElms(arr, k); 
     }
+*/
+
 }
