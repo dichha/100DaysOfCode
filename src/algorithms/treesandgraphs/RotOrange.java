@@ -37,7 +37,7 @@ public class RotOrange {
         return (temp.x == -1 && temp.y == -1);
     }
     
-    // Function to check whether there is still a frest
+    // Function to check whether there is still a fresh
     // orange remaining
     static boolean checkAll(int[][] arr){
         for(int i=0; i < R; i++){
@@ -84,47 +84,23 @@ public class RotOrange {
             while(!isDelim(Q.peek())){
                 temp = Q.peek();
                 // Check right adjacent cell that if it can be rotten
-                if(isValid(temp.x +1, temp.y) && arr[temp.x+1][temp.y] == 1){
+                if(isValid(temp.x, temp.y+1) && arr[temp.x][temp.y+1] == 1){
                     if(!flag){
                         ans++; 
                         flag = true; 
                     }
                     // make the orange rotten
-                    arr[temp.x+1][temp.y] = 2;
+                    arr[temp.x][temp.y+1] = 2;
                     
                     // push the adjacent orange to Queue
-                    temp.x ++;
+                    temp.y++;
                     Q.add(new Ele(temp.x, temp.y));
                     
                     // Move back to current cel
-                    temp.x --; 
+                    temp.y--; 
                 }
-                /*
+                
                 // Check left adjacent cell that if it can be rotten 
-                if(isValid(temp.x -1, temp.y) && arr[temp.x-1][temp.y] == 1){
-                    if(!flag){
-                        ans++; 
-                        flag = true;
-                    }
-                    arr[temp.x-1][temp.y] = 2;
-                    temp.x --; 
-                    Q.add(new Ele(temp.x, temp.y)); // push this cell to Queue
-                    temp.x++;
-                           
-                }
-                  // Check top adjacent cell that if it can be rotten 
-                if(isValid(temp.x, temp.y + 1) && arr[temp.x][temp.y + 1] == 1){
-                    if(!flag){
-                        ans++; 
-                        flag = true;
-                    }
-                    arr[temp.x][temp.y+1] = 2;
-                    temp.y++; 
-                    Q.add(new Ele(temp.x, temp.y)); // push this cell to Queue
-                    temp.y--;
-                           
-                }
-                  // Check bottom adjacent cell that if it can be rotten 
                 if(isValid(temp.x, temp.y-1) && arr[temp.x][temp.y-1] == 1){
                     if(!flag){
                         ans++; 
@@ -136,29 +112,58 @@ public class RotOrange {
                     temp.y++;
                            
                 }
-                */
+                  // Check top adjacent cell that if it can be rotten 
+                if(isValid(temp.x+1, temp.y ) && arr[temp.x+1][temp.y] == 1){
+                    if(!flag){
+                        ans++; 
+                        flag = true;
+                    }
+                    arr[temp.x+1][temp.y] = 2;
+                    temp.x++; 
+                    Q.add(new Ele(temp.x, temp.y)); // push this cell to Queue
+                    temp.x--;
+                           
+                }
+                  // Check bottom adjacent cell that if it can be rotten 
+                if(isValid(temp.x-1, temp.y) && arr[temp.x-1][temp.y] == 1){
+                    if(!flag){
+                        ans++; 
+                        flag = true;
+                    }
+                    arr[temp.x-1][temp.y] = 2;
+                    temp.x--; 
+                    Q.add(new Ele(temp.x, temp.y)); // push this cell to Queue
+                    temp.x++;
+                           
+                }
+                
                 // Pop the delimiter
                 Q.remove();
                 
             }
-             // If oranges were rotten in current frame than separe the 
-                // rotten oranges using delimiter for the next frame for
-                // processing
-                if(!Q.isEmpty()){
-                    Q.add(new Ele(-1, -1));
-                    
-                }
-                // If Queue was empty then no rotten oranges left to process 
-                // so exit
-           
+            // Pop the delimiter
+            Q.remove(); 
+            // If oranges were rotten in current frame than separate the 
+            // rotten oranges using delimiter for the next frame for
+            // processing
+
+            if(!Q.isEmpty()){
+                Q.add(new Ele(-1, -1));
+
+            }
+
+            // If Queue was empty then no rotten oranges left to process 
+            // so exit
+
         }
          // Return -1 if all oranges could not rot, o/w ans
-           // return (checkAll(arr) ? -1: ans);
+           return (checkAll(arr) ? -1: ans);
            
         
-        return -1; 
+        //return -1; 
     }
     // Drive program
+    /*
     public static void main(String[] args){
         int arr[][] = {{2, 1, 0, 2, 1}, 
                        {1, 0, 1, 2, 1}, 
@@ -167,8 +172,9 @@ public class RotOrange {
         if (ans == -1)
             System.out.println("All oranges cannot rot");
         else
-            System.out.println("Time required for all oranges to rot" + ans);
+            System.out.println("Time required for all oranges to rot " + ans);
         
     }
+    */
     
 }
