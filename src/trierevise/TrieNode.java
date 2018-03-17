@@ -21,6 +21,9 @@ public class TrieNode {
     public void put(char c, TrieNode node){
         links[c - 'a'] = node;
     }
+    public TrieNode get(char c){
+        return links[c - 'a'];
+    }
     
     
 }
