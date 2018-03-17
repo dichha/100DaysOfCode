@@ -12,7 +12,7 @@ package trierevise;
 public class TrieNode {
     private TrieNode[] links; 
     private final int R = 26;
-    private boolean isEnd; 
+    public boolean isEnd; 
     
     public TrieNode(){
         links = new TrieNode[R]; 
@@ -24,6 +24,18 @@ public class TrieNode {
     public TrieNode get(char c){
         return links[c - 'a'];
     }
+    
+    public boolean containsKey(char c){
+        return links[c-'a'] != null;
+    }
+    public void setEnd(){
+        isEnd= true;
+    }
+    public boolean isEnd(){
+        return isEnd;
+    }
+    
+    
     
     
 }
