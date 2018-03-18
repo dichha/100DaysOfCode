@@ -15,7 +15,7 @@ package collectionstream;
  *
  * @author dichha
  */
-public class StreamToSet {
+public class StreamToSet{
     public static void main(String[] args){
         /*
         // UsingCollectors
