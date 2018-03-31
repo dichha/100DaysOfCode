@@ -39,7 +39,7 @@ public class ConnectedCellsTraverse {
         }
         return maxRegion; 
     }
-    
+    /*
     public static void main(String[] args){
         int[][] matrix = {{1,1,0,0,0}, 
                           {0,1,0,0,1}, 
@@ -50,5 +50,6 @@ public class ConnectedCellsTraverse {
         int ans = getBiggestRegion(matrix); 
         System.out.println(ans);
     }
+*/
     
 }
